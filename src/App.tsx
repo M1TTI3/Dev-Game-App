@@ -48,6 +48,7 @@ export function App() {
   const [player, setPlayer] = useState<PlayerState>(defaultPlayer);
   const [error, setError] = useState('');
   const [rewardBurst, setRewardBurst] = useState(false);
+  const [showCoachTip, setShowCoachTip] = useState(true);
 
   // Scope decision for V1: one guided path keeps the product focused.
   const selectedPath = useMemo(() => {
@@ -68,9 +69,17 @@ export function App() {
 
   const canContinueFromOnboarding = onboardingProgress.picked === onboardingProgress.total;
 
+  const screenOrder: Screen[] = ['welcome', 'onboarding', 'path', 'dashboard', 'mission', 'challenge', 'reward'];
+  const currentStep = screenOrder.indexOf(screen) + 1;
+  const stepTotal = screenOrder.length;
+
   const completeChallenge = () => {
+    const cleanedInput = challengeInput
+      .trim()
+      .replace(/[“”]/g, '"')
+      .replace(/\s+/g, ' ');
     const expected = 'const heroName = "Nova";';
-    if (challengeInput.trim() !== expected) {
+    if (cleanedInput !== expected) {
       setError('Almost there — match the code exactly so the mission can run.');
       return;
     }
@@ -95,6 +104,16 @@ export function App() {
   return (
     <div className="app-shell">
       <main className="phone-frame">
+        <section className="progress-header card">
+          <div className="row-between">
+            <span className="tiny muted">Journey Progress</span>
+            <strong>
+              {currentStep}/{stepTotal}
+            </strong>
+          </div>
+          <ProgressBar label="Current run" value={currentStep} max={stepTotal} />
+        </section>
+
         {screen === 'welcome' && (
           <section className="card page hero-card">
             <p className="eyebrow">CODEQUEST</p>
@@ -190,6 +209,9 @@ export function App() {
             >
               Reveal my path
             </button>
+            <button className="btn-secondary" onClick={() => setScreen('welcome')}>
+              Back
+            </button>
           </section>
         )}
 
@@ -204,6 +226,9 @@ export function App() {
             </div>
             <button className="btn-primary" onClick={() => setScreen('dashboard')}>
               Enter dashboard
+            </button>
+            <button className="btn-secondary" onClick={() => setScreen('onboarding')}>
+              Back
             </button>
           </section>
         )}
@@ -261,6 +286,9 @@ export function App() {
             <button className="btn-primary" onClick={() => setScreen('challenge')}>
               Open coding challenge
             </button>
+            <button className="btn-secondary" onClick={() => setScreen('dashboard')}>
+              Back
+            </button>
           </section>
         )}
 
@@ -275,6 +303,14 @@ export function App() {
             <p className="eyebrow">CHALLENGE</p>
             <h2>Write this exact line of code</h2>
             <p className="muted">Expected output: your hero is now named “Nova”.</p>
+            {showCoachTip && (
+              <div className="coach-tip">
+                <p>
+                  Coach tip: keep quotes straight (<code>"</code>) and end with <code>;</code>.
+                </p>
+                <button onClick={() => setShowCoachTip(false)}>Got it</button>
+              </div>
+            )}
 
             <pre className="code-block">const heroName = "Nova";</pre>
             <textarea
@@ -288,6 +324,9 @@ export function App() {
 
             <button className="btn-primary" onClick={completeChallenge}>
               Run mission check
+            </button>
+            <button className="btn-secondary" onClick={() => setScreen('mission')}>
+              Back
             </button>
           </section>
         )}
