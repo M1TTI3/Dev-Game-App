@@ -1,0 +1,153 @@
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  color: #f5f7ff;
+  background: #0a0f1e;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #1f2f67 0%, #0a0f1e 55%);
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+}
+
+.phone-frame {
+  width: 100%;
+  max-width: 430px;
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.card {
+  background: rgba(10, 17, 35, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: 18px;
+  backdrop-filter: blur(6px);
+}
+
+h1, h2, h3, p { margin: 0; }
+
+.eyebrow {
+  color: #76d5ff;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  font-size: 12px;
+}
+
+.muted { color: #b4c0de; }
+
+.stack { display: flex; flex-direction: column; gap: 10px; }
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  background: #182240;
+  color: #e4ebff;
+  border: 1px solid #2b3a67;
+  border-radius: 999px;
+  padding: 10px 14px;
+}
+
+.chip.selected {
+  background: linear-gradient(120deg, #3674ff, #10b3ff);
+  border-color: transparent;
+}
+
+.btn-primary {
+  border: none;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #06122b;
+  background: linear-gradient(120deg, #44e3ff, #88ffcf);
+}
+
+.btn-primary:disabled {
+  filter: grayscale(0.5);
+  opacity: 0.6;
+}
+
+.stats-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 12px; }
+
+.stat-pill {
+  background: #182240;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+.row-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.micro-gap { margin-bottom: 6px; }
+
+.progress-track {
+  height: 10px;
+  border-radius: 99px;
+  background: #1c2a4f;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(120deg, #31f2f2, #64ff91);
+}
+
+.code-block {
+  background: #081024;
+  border: 1px solid #20335f;
+  color: #9ce7ff;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+textarea {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #32497d;
+  background: #0a1431;
+  color: #f1f5ff;
+  padding: 10px;
+}
+
+.error-text { color: #ff8fa0; font-weight: 600; }
+
+.reward-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.reward {
+  border-radius: 12px;
+  border: 1px solid #2f476f;
+  background: #121f3f;
+  padding: 10px 12px;
+  font-weight: 700;
+}
